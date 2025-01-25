@@ -11,8 +11,19 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       type: "credentials",
-      credentials: {},
+      credentials: {
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "your-email@example.com",
+        },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
+        if (!credentials) {
+          throw new Error("No credentials provided");
+        }
+        
         const { email, password } = credentials;
         await dbConnect();
         if (!email || !password) {
@@ -30,15 +41,18 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
   callbacks: {
     async jwt({ token, user }) {
-      if(user) {
+      if (user) {
         return {
           ...token,
-          id: user.id
-        }
+          id: user.id,
+        };
       }
-      return token
+      return token;
     },
     async session({ session, token }) {
       return {
@@ -48,6 +62,15 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
         },
       };
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) {
+        return url;
+      } else if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      } else {
+        return baseUrl;
+      }
     },
   },
 };
