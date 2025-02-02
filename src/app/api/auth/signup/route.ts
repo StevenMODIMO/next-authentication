@@ -3,7 +3,17 @@ import User from "@/model/User";
 import { dbConnect } from "@/lib/db";
 import { isEmail, isStrongPassword } from "validator";
 import { hash, genSalt } from "bcrypt";
-import { put } from "@vercel/blob";
+import { put, del } from "@vercel/blob";
+
+export async function GET(req: NextRequest) {
+  try {
+    const users = await User.find();
+    return NextResponse.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return NextResponse.json({ message: "Failed to fetch users", error });
+  }
+}
 
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
@@ -74,19 +84,10 @@ export async function DELETE(req: NextRequest) {
       { email: query },
       { new: true }
     );
+    await del(deleted.image);
     return NextResponse.json(deleted);
   } catch (error) {
     console.error("Error deleting user:", error);
     return NextResponse.json({ message: "Failed to delete user", error });
-  }
-}
-
-export async function GET(req: NextRequest) {
-  try {
-    const users = await User.find();
-    return NextResponse.json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    return NextResponse.json({ message: "Failed to fetch users", error });
   }
 }
