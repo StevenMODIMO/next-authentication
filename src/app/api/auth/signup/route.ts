@@ -84,7 +84,7 @@ export async function DELETE(req: NextRequest) {
       { email: query },
       { new: true }
     );
-    await del(deleted.image);
+    if(deleted.image) await del(deleted.image);
     return NextResponse.json(deleted);
   } catch (error) {
     console.error("Error deleting user:", error);

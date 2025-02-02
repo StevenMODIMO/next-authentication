@@ -12,9 +12,9 @@ export default async function Page() {
   const session = await getServerSession(authOptions);
   if (session) redirect("/profile");
   return (
-    <div>
-      <header>
-        <h1>Signup Now</h1>
+    <div className="w-[90%] mx-auto md:mt-20">
+      <header className="text-center font-semibold my-4 text-xl">
+        <h1>Get started now.</h1>
       </header>
       <SignupForm />
     </div>
