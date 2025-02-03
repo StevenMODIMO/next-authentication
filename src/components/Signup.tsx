@@ -69,7 +69,7 @@ export default function SignupForm() {
       <form
         onSubmit={handleSubmit}
         onFocus={() => setError(null)}
-        className="flex flex-col gap-4 sm:w-96 sm:mx-auto"
+        className="flex flex-col gap-4 sm:w-96 sm:mx-auto sm:border sm:border-orange-40 sm:rounded-2xl sm:p-6 hover:border-2"
       >
         {preview && (
           <img

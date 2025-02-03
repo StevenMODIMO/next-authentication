@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import SessionProviderComponent from "@/components/SessionProvider";
+import Footer from "@/components/Footer";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <SessionProviderComponent>
           <Header />
           {children}
+          <Footer />
         </SessionProviderComponent>
       </body>
     </html>
