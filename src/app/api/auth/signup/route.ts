@@ -6,6 +6,7 @@ import { hash, genSalt } from "bcrypt";
 import { put, del } from "@vercel/blob";
 
 export async function GET(req: NextRequest) {
+  await dbConnect();
   try {
     const users = await User.find();
     return NextResponse.json(users);
@@ -16,6 +17,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  await dbConnect();
   const formData = await req.formData();
   const email = formData.get("email");
   const password = formData.get("password");
@@ -24,8 +26,6 @@ export async function POST(req: NextRequest) {
   if (typeof email !== "string" || typeof password !== "string") {
     return NextResponse.json({ message: "Invalid input types" });
   }
-
-  await dbConnect();
 
   if (!email || !password) {
     return NextResponse.json({ message: "All fields must be filled" });
@@ -76,6 +76,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+  await dbConnect();
   const searchParams = req.nextUrl.searchParams;
   const query = searchParams.get("query");
 
@@ -84,7 +85,7 @@ export async function DELETE(req: NextRequest) {
       { email: query },
       { new: true }
     );
-    if(deleted.image) await del(deleted.image);
+    if (deleted.image) await del(deleted.image);
     return NextResponse.json(deleted);
   } catch (error) {
     console.error("Error deleting user:", error);

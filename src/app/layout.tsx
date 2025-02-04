@@ -19,11 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className}`}>
+      <body className={`${nunito.className} bg-gray-200`}>
         <SessionProviderComponent>
           <Header />
           {children}
-          <Footer />
         </SessionProviderComponent>
       </body>
     </html>

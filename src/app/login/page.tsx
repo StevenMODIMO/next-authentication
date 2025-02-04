@@ -11,7 +11,7 @@ export default async function Login() {
   const session = await getServerSession(authOptions);
   if (session) redirect("/profile");
   return (
-    <div className="w-[90%] mx-auto md:mt">
+    <div className="w-[90%] mx-auto">
       <header className="text-center font-semibold my-4 text-xl">
         <h1>Log in to continue</h1>
       </header>

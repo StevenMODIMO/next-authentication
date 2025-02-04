@@ -9,19 +9,19 @@ import { signOut, useSession } from "next-auth/react";
 export default function Header() {
   const { data: session } = useSession();
   return (
-    <div className="flex gap-4 items-center p-4">
+    <div className="flex gap-4 items-center p-2 bg-white rounded-2xl mx-auto w-fit m-2">
       <Link href="/" className="flex items-center gap-2">
         <IoHomeOutline />
         <p>Home</p>
       </Link>
       {session?.user ? (
         <>
-          <Link href="/profile" className="flex items-center gap-2">
+          <Link href="/profile" className="flex items-center gap-1">
             <FaRegCircleUser />
             <p>Profile</p>
           </Link>
           <button
-            className="bg-yellow-400 p-2 rounded flex items-center gap-2 justify-center"
+            className="bg-yellow-400 p-1 rounded-2xl flex items-center gap-1 justify-center"
             onClick={() => signOut()}
           >
             <IoMdLogOut />
@@ -30,11 +30,11 @@ export default function Header() {
         </>
       ) : (
         <>
-          <Link href="/signup" className="flex items-center gap-2">
+          <Link href="/signup" className="flex items-center gap-1">
             <MdOutlineNewLabel />
             <p>Signup</p>
           </Link>
-          <Link href="/login" className="flex items-center gap-2">
+          <Link href="/login" className="flex items-center gap-1">
             <IoMdLogIn />
             <p>Login</p>
           </Link>

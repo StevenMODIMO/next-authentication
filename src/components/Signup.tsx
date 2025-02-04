@@ -65,11 +65,11 @@ export default function SignupForm() {
   };
 
   return (
-    <div>
+    <div className="bg-gray-100 p-4 rounded-2xl sm:w-fit sm:mx-auto">
       <form
         onSubmit={handleSubmit}
         onFocus={() => setError(null)}
-        className="flex flex-col gap-4 sm:w-96 sm:mx-auto sm:border sm:border-orange-40 sm:rounded-2xl sm:p-6 hover:border-2"
+        className="flex flex-col bg-white p-2 rounded-2xl gap-4 sm:w-96 sm:mx-auto sm:border sm:border-orange-40 sm:rounded-2xl sm:p-6"
       >
         {preview && (
           <img

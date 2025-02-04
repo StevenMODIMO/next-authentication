@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await getServerSession(authOptions);
   return (
-    <div>
+    <div className="w-[90%] sm:w-96 mx-auto">
       <p>{session?.user.email}</p>
       <Image
         src={session?.user.image ?? "/next.svg"}
