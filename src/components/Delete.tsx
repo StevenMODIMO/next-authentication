@@ -19,7 +19,7 @@ export default function Delete() {
     if (response.ok) {
       console.log(json);
       await signOut({ redirect: false });
-      router.push("/delete/?msg=true");
+      router.push("/signup");
     } else {
       console.log(json.message);
     }

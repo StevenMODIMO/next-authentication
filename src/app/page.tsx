@@ -1,15 +1,12 @@
-import Image from "next/image";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <div></div>;
-}
-
-{
-  /* <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          /> */
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  if (session) {
+    redirect("/profile");
+  } else {
+    redirect("/login");
+  }
 }
