@@ -6,8 +6,10 @@ import { useRouter } from "next/navigation";
 export default function Delete() {
   const { data: session } = useSession();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setLoading(true);
     const response = await fetch(
       `/api/auth/signup/?query=${session?.user.email}`,
       {
@@ -17,10 +19,11 @@ export default function Delete() {
     const json = await response.json();
 
     if (response.ok) {
-      console.log(json);
       await signOut({ redirect: false });
+      setLoading(false);
       router.push("/signup");
     } else {
+      setLoading(false);
       console.log(json.message);
     }
   };
@@ -31,7 +34,7 @@ export default function Delete() {
         className="rounded bg-red-300 p-2 text-white"
         onClick={handleSubmit}
       >
-        Delete account
+        {loading ? "Deleting Accont" : "Delete account"}
       </button>
     </div>
   );
