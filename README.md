@@ -1,1 +1,1 @@
-# Nextjs Auth
+# Profile management system
